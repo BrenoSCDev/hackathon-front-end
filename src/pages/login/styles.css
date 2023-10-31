@@ -1,0 +1,55 @@
+.background {
+    background: url('../../assets/background-initial.png');
+    height: 100vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .logo-img {
+    background: url('../../assets/logo.png');
+    height: 30vh;
+    width: 20vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+  }
+
+  .image {
+    background: url('../../assets/logo.png');
+  }
+
+  .title {
+    font-size: 3em;
+    color: white;
+    font-weight: bolder;
+  }
+
+  .card-title {
+    font-size: 1em;
+    font-weight: bolder;
+  }
+
+  .primary-button {
+    background: #58AFCB;
+    border: none;
+    color: white;
+    border-radius: 0.5em;
+    height: 3em;
+  }
+
+  .secondary-button {
+    background: #285260;
+    border: none;
+    color: white;
+    border-radius: 0.5em;
+    height: 3em;
+  }
+  .login-button {
+    background: #3EA0F3;
+    border: none;
+    color: white;
+    border-radius: 0.5em;
+    height: 3em;
+  }
+
