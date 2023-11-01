@@ -26,6 +26,7 @@ export const LoginUser = () => {
             <input 
             placeholder='Senha'
             className='form-control'
+
             />
 
             <button className='m-3 p-2 login-button'>Entrar</button>
