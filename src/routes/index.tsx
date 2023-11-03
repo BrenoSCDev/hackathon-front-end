@@ -5,6 +5,10 @@ import { LoginUser } from "../pages/login/loginUser";
 import { LoginStaff } from "../pages/login/loginStaff";
 import { UserData } from "../pages/userDataQuery";
 import { UseAuth } from "../hooks";
+import { RegisteredStaff } from "../pages/registeredStaff";
+import { Alerts } from "../pages/alerts";
+import { EntryQueryPage } from "../pages/entryQuery";
+// import { DashBoard } from "../layout";
 
 const PrivateRoute: React.FC<{ element: JSX.Element }> = ({ element }) => {
     const {auth} = UseAuth()
@@ -36,5 +40,24 @@ export const router = createBrowserRouter([
         <PrivateRoute element={
             <UserData/>
         }/>
+    },
+    {
+        path: "/RegisteredStaff",
+        element: 
+        // <PrivateRoute element={
+            <RegisteredStaff/>
+        //}/>    
+    },
+    {
+        path: "/Alerts",
+        element: 
+        // <PrivateRoute element={
+            <Alerts/>
+        //}/>  
+    },
+    {
+        path: "/Entrada-Efetivos",
+        element: <EntryQueryPage/>
     }
+    
 ])
