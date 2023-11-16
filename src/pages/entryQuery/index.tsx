@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Container, Table, Form, Button } from 'react-bootstrap';
+import Sidebar from '../../components/sidebar';
 const entradaSaidaData = [
     {
       id: 1,
@@ -183,6 +184,11 @@ export function EntryQueryPage() {
     };
   
     return (
+      <div className='row'>
+        <div className='col-md-2'>
+        <Sidebar/>
+        </div>
+        <div className='col-md-10'>
       <Container>
         <h1>Registros de Entrada e Saída de Efetivo</h1>
         
@@ -251,5 +257,7 @@ export function EntryQueryPage() {
           </tbody>
         </Table>
       </Container>
+        </div>
+      </div>
     );
 }

@@ -1,9 +1,25 @@
-import React from 'react'
+import React, {useState, ChangeEvent} from 'react'
 import "./styles.css"
 import { Card, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'
+import { UseAuth } from '../../hooks';
+
 
 export const LoginUser = () => {
+  const [username, setUsername] = useState<string>('2244')
+  const [pwd, setPwd] = useState<string>('pamonha#22')
+  const {signIn, error, loading} = UseAuth()
+
+  const navigate = useNavigate()
+
+  function handleLogin(){
+    signIn(username, pwd)
+    setTimeout(() => {
+      if(!error){
+        navigate('/Entrada-Efetivos')
+      }
+    }, 1000)
+  }
   return (
     <div className='background d-flex align-items-center justify-content-center'>
     <div className='col-4 m-4'>
@@ -21,17 +37,24 @@ export const LoginUser = () => {
             <input 
             placeholder='Login'
             className='form-control'
+            value={username}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
             />
+
             <span className='m-1 mt-4 card-title'>Senha</span>
             <input 
             placeholder='Senha'
             className='form-control'
-
+            value={pwd}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setPwd(e.target.value)}
             />
 
-            <button className='m-3 p-2 login-button'>Entrar</button>
+            <button className='m-3 p-2 login-button' onClick={handleLogin}>Entrar</button>
           </div>
+          {error}
+          {loading ? 'carregando...' : null}
         </Card.Body>
+        
       </Card>
     </div>
   </div>
