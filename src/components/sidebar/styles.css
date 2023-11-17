@@ -2,8 +2,9 @@
     flex-direction: row;
     display: flex;
     margin-bottom: 1em;
+    position: relative;
 }
-
+  
 .icon-img{
     height: 30px;
     margin: 0 0 0 70px;
@@ -17,4 +18,10 @@
     margin-left: 8px;
     font-size: 10px;
     font-weight: bold;
+}
+
+
+.dropdown-options:hover {
+    background-color: #ccc;
+    cursor: pointer;
 }

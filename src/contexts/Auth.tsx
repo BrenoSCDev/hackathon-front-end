@@ -33,14 +33,16 @@ export const AuthProvider: React.FC<IParent> = ({children}) => {
                         setAuth(true)
                         localStorage.setItem("user", JSON.stringify(userResponse))
                         localStorage.setItem("user_token", tokenResponse)
+                        setLoading(null)
                     }
             }catch (error: any) {
                 if(error.response){
                     const errorRes = JSON.stringify(error.response.data.mensagem)
-                    setError(errorRes.replace(/"/g, ""))
+                    // setError(errorRes.replace(/"/g, ""))
+                    setError(JSON.stringify(error.response.data.unauthorized))
+                    setLoading(null)
                 }
             }
-            setLoading(false)
     }
 
     function signOut(){

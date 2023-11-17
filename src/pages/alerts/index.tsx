@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
-import { Container, Dropdown, ButtonGroup, Table } from 'react-bootstrap';
+import React, {useState, useEffect} from 'react';
+import { Container, Dropdown, ButtonGroup, Table, Form, Button } from 'react-bootstrap';
 import { Pagination } from '../../components/pagination';
+import { AiOutlineSearch } from 'react-icons/ai';
 
 const alertData = [
     {
@@ -125,44 +126,90 @@ const alertData = [
     },
   ];
 export function Alerts() {
-    const [currentPage, setCurrentPage] = useState<number>(0);
-    const totalPages = 2
-      
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [filteredAlerts, setFilteredAlerts] = useState<any[]>([]);
+  const totalPages = 2;
+
+  const [selectedCategory, setSelectedCategory] = useState<string>('Todos');
+  const [selectedDate, setSelectedDate] = useState<string>('Todos');
+
+  useEffect(() => {
+    // Função para filtrar os alertas com base nos dropdowns selecionados
+    const filterAlerts = () => {
+      let filtered = alertData;
+
+      if (selectedCategory !== 'Todos') {
+        filtered = filtered.filter(alert => alert.category === selectedCategory);
+      }
+
+      if (selectedDate !== 'Todos') {
+        // Lógica para filtrar por data
+        // Você pode usar bibliotecas como Moment.js para facilitar a manipulação de datas
+        // Aqui, estou apenas simulando a lógica para filtrar por "Hoje"
+        const today = new Date().toISOString().split('T')[0];
+        filtered = filtered.filter(alert => alert.timestamp.split(' ')[0] === today);
+      }
+
+      setFilteredAlerts(filtered);
+    };
+
+    filterAlerts();
+  }, [selectedCategory, selectedDate]);
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+  };
+
+  const handleDateChange = (date: string) => {
+    setSelectedDate(date);
+  };
+
   const handlePageClick = (data: { selected: number }) => {
     setCurrentPage(data.selected);
   };
+
+
   return (
     <Container>
       <h1 className='m-3'>Alertas</h1>
-
-      <ButtonGroup className="mb-3">
+      <div className='row'>
+      <ButtonGroup className="mb-3 col-md-3">
         <Dropdown>
-          <Dropdown.Toggle variant="secondary" id="categoria-dropdown" className='m-3'>
+          <Dropdown.Toggle variant="secondary" id="categoria-dropdown" className=''>
             Categoria
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item>Todos</Dropdown.Item>
-            <Dropdown.Item>Sucesso</Dropdown.Item>
-            <Dropdown.Item>Erro</Dropdown.Item>
-            <Dropdown.Item>Informação</Dropdown.Item>
+          <Dropdown.Item onClick={() => handleCategoryChange('Todos')}>Todos</Dropdown.Item>
+            <Dropdown.Item onClick={() => handleCategoryChange('Sucesso')}>Sucesso</Dropdown.Item>
+            <Dropdown.Item onClick={() => handleCategoryChange('Erro')}>Erro</Dropdown.Item>
+            <Dropdown.Item onClick={() => handleCategoryChange('Informação')}>Informação</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </ButtonGroup>
 
-      <ButtonGroup className="mb-3">
-        <Dropdown>
-          <Dropdown.Toggle variant="secondary" id="data-horario-dropdown">
-            Data/Horário
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item>Todos</Dropdown.Item>
-            <Dropdown.Item>Hoje</Dropdown.Item>
-            <Dropdown.Item>Ontem</Dropdown.Item>
-            <Dropdown.Item>Esta Semana</Dropdown.Item>
-            <Dropdown.Item>Mês Atual</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </ButtonGroup>
+      <Form.Group className="mb-3 col-md-3">
+            <Form.Control
+              type="date"
+              placeholder="Filtrar por Data Final"
+              // value={filtroDataFinal}
+              // onChange={(e) => setFiltroDataFinal(e.target.value)}
+            />
+          </Form.Group>
+  
+          <Form.Group className="mb-3 col-md-3">
+            <Form.Control
+              type="time"
+              placeholder="Filtrar por Hora Inicial"
+              // value={filtroHoraInicial}
+              // onChange={(e) => setFiltroHoraInicial(e.target.value)}
+            />
+          </Form.Group>
+
+        <button className='btn btn-primary mb-3 col-md-2'>
+          <AiOutlineSearch size={20}/>
+          Pesquisar
+        </button>
+      </div>
 
       <Table striped bordered hover>
         <thead>

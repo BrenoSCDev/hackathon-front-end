@@ -35,8 +35,8 @@ export const Login = () => {
               </div>
             </Card.Title>
             <div className='d-flex flex-column'>
-              <button className='m-3 p-2 primary-button' onClick={() => navigate('/LoginStaff')}>EFETIVO</button>
-              <button className='m-3 p-2 secondary-button' onClick={() => navigate('/LoginUser')}>USUÁRIO</button>
+              <button className='m-3 p-2 primary-button' onClick={() => navigate('/Login-Efetivos')}>EFETIVO</button>
+              <button className='m-3 p-2 secondary-button' onClick={() => navigate('/Login-Usuario')}>USUÁRIO</button>
             </div>
           </Card.Body>
         </Card>

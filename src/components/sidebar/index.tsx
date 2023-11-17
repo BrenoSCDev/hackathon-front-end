@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   CDBSidebar,
   CDBSidebarContent,
@@ -12,6 +12,10 @@ import { logo } from '../../layout';
 import { IoNewspaper } from "react-icons/io5";
 import "./styles.css"
 import { UseAuth } from '../../hooks';
+import Dropdown from 'react-bootstrap/Dropdown';
+import { DropdownContent } from './styles';
+import { useNavigate } from 'react-router-dom';
+
 
 const Sidebar = () => {
   const [showName, setShowName] = React.useState(false);
@@ -27,6 +31,13 @@ const Sidebar = () => {
   const walkingIcon = require('../../assets/walking.png')
   const signOutIcon = require('../../assets/entrar.png')
 
+
+
+  const [dropdownUsersOpen, setDropUsersdownOpen] = useState<boolean>(false)
+  const [dropdownReportsOpen, setDropdownReportsOpen] = useState<boolean>(false)
+
+  const navigate = useNavigate()
+
   const {signOut} = UseAuth()
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial', position: 'fixed' }}>
@@ -39,69 +50,58 @@ const Sidebar = () => {
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <Link to='/' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
-              <div className='menu-icon'>
-                <img src={userIcon} className='icon-img'/>
-                <span>{showName && <p className='menu-hover-text'>CONTAS</p>}</span>
-              </div>
-            </Link>
-            <Link to='/' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
-              <div className='menu-icon'>
-                <img src={reportIcon} className='icon-img'/>
-                <span>{showName && <p className='menu-hover-text'>RELATORIOS</p>}</span>
-              </div>
-            </Link>
-            <Link to='/' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
+          <div className='menu-icon' onMouseEnter={() => setDropUsersdownOpen(true)} onMouseLeave={() => setDropUsersdownOpen(false)}>
+            <img src={userIcon} className='icon-img'/>
+            {dropdownUsersOpen && (
+              <DropdownContent>
+                <p className='dropdown-options' onClick={() => navigate('/Usuarios-Cadastrados')}>Usuários</p>
+                <p className='dropdown-options' onClick={() => navigate('/Efetivos-Cadastrados')}>Efetivos</p>
+              </DropdownContent>
+            )}
+          </div>
+
+          <div className='menu-icon' onMouseEnter={() => setDropdownReportsOpen(true)} onMouseLeave={() => setDropdownReportsOpen(false)}>
+            <img src={reportIcon} className='icon-img'/>
+            {dropdownReportsOpen && (
+              <DropdownContent>
+                <p className='dropdown-options' onClick={() => navigate('/Entrada-Efetivos')}>Efetivos</p>
+                <p className='dropdown-options' onClick={() => navigate('/Entrada-Veiculos')}>Veículos</p>
+              </DropdownContent>
+            )}
+          </div>
+            <Link to='/Postos-de-Servico' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
               <div className='menu-icon'>
                 <img src={garageIcon} className='icon-img'/>
                 <span>{showName && <p className='menu-hover-text'>POSTOS DE SERVIÇO</p>}</span>
               </div>
             </Link>
-            <Link to='/' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
+            <Link to='/Alertas' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
               <div className='menu-icon'>
                 <img src={warningIcon} className='icon-img'/>
                 <span>{showName && <p className='menu-hover-text'>ALERTAS</p>}</span>
               </div>
             </Link>
-            <Link to='/' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
+            <Link to='/Unidades' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
               <div className='menu-icon'>
                 <img src={unitsIcon} className='icon-img'/>
                 <span>{showName && <p className='menu-hover-text'>UNIDADES</p>}</span>
               </div>
             </Link>
-            <Link to='/' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
-              <div className='menu-icon'>
-                <img src={personIcon} className='icon-img'/>
-                <span>{showName && <p className='menu-hover-text'>ALERTAS</p>}</span>
-              </div>
-            </Link>
-            <Link to='/' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
+            <Link to='/Veiculos-Cadastrados' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
               <div className='menu-icon'>
                 <img src={carIcon} className='icon-img'/>
                 <span>{showName && <p className='menu-hover-text'>VEÍCULOS</p>}</span>
               </div>
             </Link>
-            <Link to='/' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
+            <Link to='/Gerencia' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
               <div className='menu-icon'>
                 <img src={configIcon} className='icon-img'/>
                 <span>{showName && <p className='menu-hover-text'>ALERTAS</p>}</span>
               </div>
             </Link>
-            <Link to='/' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
+            <Link to='/Crachas-Cadastrados' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
               <div className='menu-icon'>
                 <img src={cardIcon} className='icon-img'/>
-                <span>{showName && <p className='menu-hover-text'>ALERTAS</p>}</span>
-              </div>
-            </Link>
-            <Link to='/' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
-              <div className='menu-icon'>
-                <img src={warningIcon} className='icon-img'/>
-                <span>{showName && <p className='menu-hover-text'>ALERTAS</p>}</span>
-              </div>
-            </Link>
-            <Link to='/' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
-              <div className='menu-icon'>
-                <img src={walkingIcon} className='icon-img'/>
                 <span>{showName && <p className='menu-hover-text'>ALERTAS</p>}</span>
               </div>
             </Link>
