@@ -1,4 +1,4 @@
-import React, {useState, ChangeEvent} from 'react';
+import React, {useState, ChangeEvent, useEffect} from 'react';
 import { Container, Table, Dropdown, ButtonGroup, FormControl } from 'react-bootstrap';
 import { FaEdit, FaTrash, FaUserPlus } from 'react-icons/fa';
 import { AiOutlineSearch } from 'react-icons/ai'
@@ -137,6 +137,7 @@ const usersData = [
 
 export function RegisteredUsers() {
   const [currentPage, setCurrentPage] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true)
   const totalPages = 2
   const handlePageClick = (data: { selected: number }) => {
     setCurrentPage(data.selected);
@@ -162,10 +163,21 @@ export function RegisteredUsers() {
     });
     setFilteredUser(filtered);
   };
+  useEffect(() => {
+    setTimeout(() => {
+     setLoading(false)
+    }, 2000) 
+   })
+ 
   return (
 <Container>
   <h1>Usuários Cadastrados</h1>
-
+    {
+      loading ? 
+      <div style={{display: 'flex', justifyContent: 'center', height: '50vh'}}>
+      <Loader/>
+    </div> :
+    <>
   <ButtonGroup className="mb-3 m-2">
     <Dropdown>
       <Dropdown.Toggle variant="secondary" id="filtro-ordem-dropdown">
@@ -242,14 +254,14 @@ export function RegisteredUsers() {
           {user.modulos.map((modulo: any, index: any) => (
             <li style={{listStyleType: 'none'}} key={index}>{modulo}</li>
           ))}
-          <td>
-            <button>
-              <FaEdit /> Atualizar
-            </button>
-            <button>
-              <FaTrash /> Excluir
-            </button>
-          </td>
+            <td>
+              <button style={{background: 'none', border: 'none'}}>
+                <FaEdit color='#1E90FF' size={25}/>
+              </button>
+              <button style={{background: 'none', border: 'none'}}>
+                <FaTrash color='#1E90FF' size={22}/>
+              </button>
+            </td>
         </tr>
       ))}
     </tbody>
@@ -258,6 +270,8 @@ export function RegisteredUsers() {
     totalPages={totalPages}
     handlePageClick={handlePageClick}
   />
+    </>
+    }
 </Container>
 
   );

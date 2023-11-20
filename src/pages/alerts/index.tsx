@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { Container, Dropdown, ButtonGroup, Table, Form, Button } from 'react-bootstrap';
 import { Pagination } from '../../components/pagination';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { FaEdit, FaTrash, FaUserPlus } from 'react-icons/fa';
+import { Loader } from '../../components/loader';
 
 const alertData = [
     {
@@ -129,7 +131,7 @@ export function Alerts() {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [filteredAlerts, setFilteredAlerts] = useState<any[]>([]);
   const totalPages = 2;
-
+  const [loading, setLoading] = useState<boolean>(true)
   const [selectedCategory, setSelectedCategory] = useState<string>('Todos');
   const [selectedDate, setSelectedDate] = useState<string>('Todos');
 
@@ -168,10 +170,22 @@ export function Alerts() {
     setCurrentPage(data.selected);
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+     setLoading(false)
+    }, 2000) 
+   })
+ 
 
   return (
     <Container>
       <h1 className='m-3'>Alertas</h1>
+      {
+        loading ? 
+        <div style={{display: 'flex', justifyContent: 'center', height: '50vh'}}>
+        <Loader/>
+      </div> :
+      <>
       <div className='row'>
       <ButtonGroup className="mb-3 col-md-3">
         <Dropdown>
@@ -210,7 +224,6 @@ export function Alerts() {
           Pesquisar
         </button>
       </div>
-
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -218,6 +231,7 @@ export function Alerts() {
             <th>Categoria</th>
             <th>Mensagem</th>
             <th>Data/Horário</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -227,6 +241,14 @@ export function Alerts() {
               <td>{alert.category}</td>
               <td>{alert.message}</td>
               <td>{alert.timestamp}</td>
+              <td>
+                <button style={{background: 'none', border: 'none'}}>
+                  <FaEdit color='#1E90FF' size={25}/>
+                </button>
+                <button style={{background: 'none', border: 'none'}}>
+                  <FaTrash color='#1E90FF' size={22}/>
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -235,6 +257,8 @@ export function Alerts() {
       totalPages={totalPages}
       handlePageClick={handlePageClick}
       />
+      </>
+      }
     </Container>
   );
 }

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Table, Form, Button, Row, Col } from 'react-bootstrap';
 import { Pagination } from '../../components/pagination';
 import { FaEdit, FaTrash, FaCarSide } from 'react-icons/fa';
+import { Loader } from '../../components/loader';
 
 const veiculosData = [
     {
@@ -208,6 +209,7 @@ const veiculosData = [
   
 
 export function VehiclePage() {
+  const [loading, setLoading] = useState<boolean>(true)
   const [filteredData, setFilteredData] = useState(veiculosData);
   const [filtroDono, setFiltroDono] = useState('');
   const [filtroCor, setFiltroCor] = useState('');
@@ -237,11 +239,22 @@ export function VehiclePage() {
   function handlePageClick(data: { selected: number }) {
     setCurrentPage(data.selected);
   }
+  useEffect(() => {
+    setTimeout(() => {
+     setLoading(false)
+    }, 2000) 
+   })
+ 
 
   return (
     <Container>
       <h1>Veículos Cadastrados</h1>
-
+    {
+      loading ? 
+      <div style={{display: 'flex', justifyContent: 'center', height: '50vh'}}>
+      <Loader/>
+    </div> :
+    <>
       <Row>
         <Col>
           <Form>
@@ -338,18 +351,20 @@ export function VehiclePage() {
               <td>{veiculo.renavam}</td>
               <td>{veiculo.selo}</td>
               <td>
-            <button>
-              <FaEdit /> Atualizar
-            </button>
-            <button>
-              <FaTrash /> Excluir
-            </button>
-          </td>
+                <button style={{background: 'none', border: 'none'}}>
+                  <FaEdit color='#1E90FF' size={25}/>
+                </button>
+                <button style={{background: 'none', border: 'none'}}>
+                  <FaTrash color='#1E90FF' size={22}/>
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
       </Table>
       <Pagination totalPages={totalPages} handlePageClick={handlePageClick} />
+    </>
+    }
     </Container>
   );
 }

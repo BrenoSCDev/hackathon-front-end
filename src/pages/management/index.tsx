@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import Chart, { ChartConfiguration } from 'chart.js/auto';
+import { Loader } from '../../components/loader';
 
 interface ChartData {
   labels: string[];
@@ -89,9 +90,17 @@ export const GerenciaGeralPage: React.FC = () => {
       });
     }, [chartData]);
 
+    const [loading, setLoading] = useState<boolean>(true)
+    useEffect(() => {
+      setTimeout(() => {
+       setLoading(false)
+      }, 2000) 
+     })
+   
   return (
     <Container>
       <h1>Gerência Geral</h1>
+
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         {chartData.map((_, index) => (
           <div key={index} style={{ width: '45%' }}>
@@ -100,6 +109,7 @@ export const GerenciaGeralPage: React.FC = () => {
           </div>
         ))}
       </div>
+      
     </Container>
   );
 };

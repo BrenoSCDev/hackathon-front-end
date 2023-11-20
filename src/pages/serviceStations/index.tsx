@@ -1,4 +1,4 @@
-import React, {useState, ChangeEvent} from 'react';
+import React, {useState, ChangeEvent, useEffect} from 'react';
 import { Container, Table, Dropdown, ButtonGroup, FormControl } from 'react-bootstrap';
 import { FaEdit, FaTrash, FaUserPlus,FaWarehouse} from 'react-icons/fa';
 import { AiOutlineSearch } from 'react-icons/ai'
@@ -117,6 +117,7 @@ const postosData = [
 
 
 export function ServiceStations() {
+  const [loading, setLoading] = useState<boolean>(true)
   const [currentPage, setCurrentPage] = useState<number>(0);
   const totalPages = 2
   const handlePageClick = (data: { selected: number }) => {
@@ -141,10 +142,22 @@ export function ServiceStations() {
     });
     setFilteredPosts(filtered);
   };
+  useEffect(() => {
+    setTimeout(() => {
+     setLoading(false)
+    }, 2000) 
+   })
+ 
   return (
 <Container>
   <h1>Postos de Serviço</h1>
 
+  {
+    loading ? 
+    <div style={{display: 'flex', justifyContent: 'center', height: '50vh'}}>
+    <Loader/>
+  </div> :
+  <>
   <ButtonGroup className="mb-3 m-2">
     <Dropdown>
       <Dropdown.Toggle variant="secondary" id="filtro-ordem-dropdown">
@@ -218,21 +231,23 @@ export function ServiceStations() {
           <td>{posto.nomePosto}</td>
           <td>{posto.nivelAcesso}</td>
           <td>
-            <button>
-              <FaEdit /> Atualizar
+            <button style={{background: 'none', border: 'none'}}>
+              <FaEdit color='#1E90FF' size={25}/>
             </button>
-            <button>
-              <FaTrash /> Excluir
+            <button style={{background: 'none', border: 'none'}}>
+              <FaTrash color='#1E90FF' size={22}/>
             </button>
           </td>
         </tr>
       ))}
     </tbody>
   </Table>
-  {/* <Pagination 
+  <Pagination 
     totalPages={totalPages}
     handlePageClick={handlePageClick}
-  /> */}
+  />
+  </>
+  }
 </Container>
 
   );

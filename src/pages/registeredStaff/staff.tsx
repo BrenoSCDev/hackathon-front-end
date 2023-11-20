@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Container, Table, Dropdown, ButtonGroup, FormControl } from 'react-bootstrap';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { AiOutlineSearch } from 'react-icons/ai'
 import { Pagination } from '../../components/pagination';
+import { Loader } from '../../components/loader';
 
 const efetivosData = [
   {
@@ -150,6 +151,7 @@ const efetivosData = [
 
 export function RegisteredStaff() {
   const [currentPage, setCurrentPage] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true)
   const totalPages = 2
   const handlePageClick = (data: { selected: number }) => {
     setCurrentPage(data.selected);
@@ -170,10 +172,24 @@ export function RegisteredStaff() {
     setFilteredEfetivos(filtered);
   };
 
+  useEffect(() => {
+   setTimeout(() => {
+    setLoading(false)
+   }, 2000) 
+  })
+
   return (
     <Container>
       <h1>Efetivos Cadastrados</h1>
 
+      {
+        loading ? 
+        <div style={{display: 'flex', justifyContent: 'center', height: '50vh'}}>
+          <Loader/>
+        </div>
+        
+      :
+      <>
       <ButtonGroup className="mb-3 m-2">
         <Dropdown>
           <Dropdown.Toggle variant="secondary" id="filtro-ordem-dropdown">
@@ -225,7 +241,6 @@ export function RegisteredStaff() {
         <AiOutlineSearch size={20}/>
         Pesquisar
       </button>
-
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -244,11 +259,11 @@ export function RegisteredStaff() {
               <td>{efetivo.nomeCompleto}</td>
               <td>{efetivo.unidade}</td>
               <td>
-                <button>
-                  <FaEdit /> Atualizar
+                <button style={{background: 'none', border: 'none'}}>
+                  <FaEdit color='#1E90FF' size={25}/>
                 </button>
-                <button>
-                  <FaTrash /> Excluir
+                <button style={{background: 'none', border: 'none'}}>
+                  <FaTrash color='#1E90FF' size={22}/>
                 </button>
               </td>
             </tr>
@@ -259,6 +274,8 @@ export function RegisteredStaff() {
       totalPages={totalPages}
       handlePageClick={handlePageClick}
       />
+      </>
+      }
     </Container>
   );
 }

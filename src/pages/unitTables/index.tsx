@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Table, Form, Button } from 'react-bootstrap';
 import { Pagination } from '../../components/pagination';
 import { FaEdit, FaTrash, FaUserPlus } from 'react-icons/fa';
+import { Loader } from '../../components/loader';
 
 const unidadesData = [
     {
@@ -148,6 +149,7 @@ const unidadesData = [
   
 
 export function UnitTablePage() {
+  const [loading, setLoading] = useState<boolean>(true)
   const [filteredData, setFilteredData] = useState(unidadesData);
   const [filtroNome, setFiltroNome] = useState('');
   const [filtroEfetivos, setFiltroEfetivos] = useState('');
@@ -172,10 +174,21 @@ export function UnitTablePage() {
     setCurrentPage(data.selected);
   }
 
+  useEffect(() => {
+    setTimeout(() => {
+     setLoading(false)
+    }, 2000) 
+   })
+ 
   return (
     <Container>
       <h1>Tabela de Unidades</h1>
-
+    {
+      loading ? 
+      <div style={{display: 'flex', justifyContent: 'center', height: '50vh'}}>
+      <Loader/>
+    </div> :
+    <>
       <Form>
         <Form.Group className="mb-3">
           <Form.Control
@@ -235,18 +248,20 @@ export function UnitTablePage() {
               <td>{unidade.numVeiculos}</td>
               <td>{unidade.nivelAcesso}</td>
               <td>
-            <button>
-              <FaEdit /> Atualizar
-            </button>
-            <button>
-              <FaTrash /> Excluir
-            </button>
-          </td>
+                <button style={{background: 'none', border: 'none'}}>
+                  <FaEdit color='#1E90FF' size={25}/>
+                </button>
+                <button style={{background: 'none', border: 'none'}}>
+                  <FaTrash color='#1E90FF' size={22}/>
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
       </Table>
       <Pagination totalPages={totalPages} handlePageClick={handlePageClick} />
+    </>
+    }
     </Container>
   );
 }

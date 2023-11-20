@@ -56,7 +56,7 @@ export const router = createBrowserRouter([
             <Dashboard>
                 <RegisteredStaff/>
             </Dashboard>
-        }/>    
+        }/>
     },
     {
         path: "/Usuarios-Cadastrados",

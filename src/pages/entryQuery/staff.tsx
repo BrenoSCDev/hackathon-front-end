@@ -1,7 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Container, Table, Form, Button } from 'react-bootstrap';
 import Sidebar from '../../components/sidebar';
 import { Pagination } from '../../components/pagination';
+import { FaEdit, FaTrash, FaUserPlus } from 'react-icons/fa';
+import { Loader } from '../../components/loader';
+
 const entradaSaidaData = [
     {
       id: 1,
@@ -166,6 +169,7 @@ const entradaSaidaData = [
   ];
   
 export function EntryQueryPage() {
+    const [loading, setLoading] = useState<boolean>(true)
     const [filteredData, setFilteredData] = useState(entradaSaidaData);
     const [filtroNome, setFiltroNome] = useState('');
     const [filtroDataFinal, setFiltroDataFinal] = useState('');
@@ -189,10 +193,22 @@ export function EntryQueryPage() {
       setCurrentPage(data.selected);
     };
   
+    useEffect(() => {
+      setTimeout(() => {
+       setLoading(false)
+      }, 2000) 
+     })
+   
+
     return (
       <Container>
         <h1>Registros de Entrada e Saída de Efetivo</h1>
-        
+        {
+          loading ? 
+          <div style={{display: 'flex', justifyContent: 'center', height: '50vh'}}>
+          <Loader/>
+        </div> :
+        <>
         <Form>
           <Form.Group className="mb-3">
             <Form.Control
@@ -243,6 +259,7 @@ export function EntryQueryPage() {
               <th>Data Final</th>
               <th>Hora Inicial</th>
               <th>Hora Final</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -253,6 +270,14 @@ export function EntryQueryPage() {
                 <td>{registro.dataFinal}</td>
                 <td>{registro.horaInicial}</td>
                 <td>{registro.horaFinal}</td>
+                <td>
+                <button style={{background: 'none', border: 'none'}}>
+                  <FaEdit color='#1E90FF' size={25}/>
+                </button>
+                <button style={{background: 'none', border: 'none'}}>
+                  <FaTrash color='#1E90FF' size={22}/>
+                </button>
+              </td>
               </tr>
             ))}
           </tbody>
@@ -261,6 +286,8 @@ export function EntryQueryPage() {
         totalPages={totalPages}
         handlePageClick={handlePageClick}
         />
+        </>
+        }
       </Container>
     );
 }

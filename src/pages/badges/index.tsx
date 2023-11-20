@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Table, Form, Button } from 'react-bootstrap';
 import { Pagination } from '../../components/pagination';
 import { FaEdit, FaTrash, FaUserPlus } from 'react-icons/fa';
+import { Loader } from '../../components/loader';
 const crachasData = [
     {
       id: 1,
@@ -207,6 +208,7 @@ const crachasData = [
   
 
   export function BadgePage() {
+    const [loading, setLoading] = useState(true)
     const [filteredData, setFilteredData] = useState(crachasData);
     const [filtroNome, setFiltroNome] = useState('');
     const [filtroCPF, setFiltroCPF] = useState('');
@@ -239,10 +241,21 @@ const crachasData = [
     setCurrentPage(data.selected);
   }
 
+  useEffect(() => {
+    setTimeout(() => {
+     setLoading(false)
+    }, 2000) 
+   })
+ 
   return (
     <Container>
       <h1>Crachás Cadastrados</h1>
-
+      {
+        loading ? 
+        <div style={{display: 'flex', justifyContent: 'center', height: '50vh'}}>
+        <Loader/>
+      </div> : 
+      <>
       <Form>
         <Form.Group className="mb-3">
           <Form.Control
@@ -342,18 +355,20 @@ const crachasData = [
               <td>{cracha.dataFinalAcesso}</td>
               <td>{cracha.nivelAcesso}</td>
               <td>
-                <button>
-                <FaEdit /> Atualizar
+                <button style={{background: 'none', border: 'none'}}>
+                  <FaEdit color='#1E90FF' size={25}/>
                 </button>
-                <button>
-                <FaTrash /> Excluir
+                <button style={{background: 'none', border: 'none'}}>
+                  <FaTrash color='#1E90FF' size={22}/>
                 </button>
-            </td>
+              </td>
             </tr>
           ))}
         </tbody>
       </Table>
       <Pagination totalPages={totalPages} handlePageClick={handlePageClick} />
+      </>
+      }
     </Container>
   );
 }
