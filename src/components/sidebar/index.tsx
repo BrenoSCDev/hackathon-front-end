@@ -18,7 +18,15 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Sidebar = () => {
-  const [showName, setShowName] = React.useState(false);
+
+  const [showName, setShowName] = useState(false);
+  const [showPosts, setShowPosts] = useState(false)
+  const [showAlerts, setShowAlerts] = useState(false)
+  const [showUnits, setShowUnits] = useState(false)
+  const [showVehicles, setShowVehicles] = useState(false)
+  const [showManage, setShowManage] = useState(false)
+  const [showBadge, setShowBadge] = useState(false)
+
   const userIcon = require('../../assets/user-3.png')
   const warningIcon = require('../../assets/warning.png')
   const reportIcon = require('../../assets/report.png')
@@ -69,40 +77,40 @@ const Sidebar = () => {
               </DropdownContent>
             )}
           </div>
-            <Link to='/Postos-de-Servico' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
+            <Link to='/Postos-de-Servico' onMouseEnter={() => setShowPosts(true)} onMouseLeave={() => setShowPosts(false)}>
               <div className='menu-icon'>
                 <img src={garageIcon} className='icon-img'/>
-                <span>{showName && <p className='menu-hover-text'>POSTOS DE SERVIÇO</p>}</span>
+                <span>{showPosts && <p className='menu-hover-text'>POSTOS DE SERVIÇO</p>}</span>
               </div>
             </Link>
-            <Link to='/Alertas' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
+            <Link to='/Alertas' onMouseEnter={() => setShowAlerts(true)} onMouseLeave={() => setShowAlerts(false)}>
               <div className='menu-icon'>
                 <img src={warningIcon} className='icon-img'/>
-                <span>{showName && <p className='menu-hover-text'>ALERTAS</p>}</span>
+                <span>{showAlerts && <p className='menu-hover-text'>ALERTAS</p>}</span>
               </div>
             </Link>
-            <Link to='/Unidades' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
+            <Link to='/Unidades' onMouseEnter={() => setShowUnits(true)} onMouseLeave={() => setShowUnits(false)}>
               <div className='menu-icon'>
                 <img src={unitsIcon} className='icon-img'/>
-                <span>{showName && <p className='menu-hover-text'>UNIDADES</p>}</span>
+                <span>{showUnits && <p className='menu-hover-text'>UNIDADES</p>}</span>
               </div>
             </Link>
-            <Link to='/Veiculos-Cadastrados' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
+            <Link to='/Veiculos-Cadastrados' onMouseEnter={() => setShowVehicles(true)} onMouseLeave={() => setShowVehicles(false)}>
               <div className='menu-icon'>
                 <img src={carIcon} className='icon-img'/>
-                <span>{showName && <p className='menu-hover-text'>VEÍCULOS</p>}</span>
+                <span>{showVehicles && <p className='menu-hover-text'>VEÍCULOS</p>}</span>
               </div>
             </Link>
-            <Link to='/Gerencia' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
+            <Link to='/Gerencia' onMouseEnter={() => setShowManage(true)} onMouseLeave={() => setShowManage(false)}>
               <div className='menu-icon'>
                 <img src={configIcon} className='icon-img'/>
-                <span>{showName && <p className='menu-hover-text'>ALERTAS</p>}</span>
+                <span>{showManage && <p className='menu-hover-text'>GERÊNCIA</p>}</span>
               </div>
             </Link>
-            <Link to='/Crachas-Cadastrados' onMouseEnter={() => setShowName(true)} onMouseLeave={() => setShowName(false)}>
+            <Link to='/Crachas-Cadastrados' onMouseEnter={() => setShowBadge(true)} onMouseLeave={() => setShowBadge(false)}>
               <div className='menu-icon'>
                 <img src={cardIcon} className='icon-img'/>
-                <span>{showName && <p className='menu-hover-text'>ALERTAS</p>}</span>
+                <span>{showBadge && <p className='menu-hover-text'>CRACHÁS</p>}</span>
               </div>
             </Link>
           </CDBSidebarMenu>

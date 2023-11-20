@@ -5,6 +5,7 @@ import { Loader } from '../../components/loader';
 
 interface ChartData {
   labels: string[];
+  title: string;
   datasets: {
     label: string;
     data: number[];
@@ -22,6 +23,7 @@ export const GerenciaGeralPage: React.FC = () => {
       // Dados fictícios para exemplo
       const totalPessoas: ChartData = {
         labels: ['Efetivos', 'Visitantes'],
+        title: 'Total de Pessoas',
         datasets: [
           {
             label: 'Total de Pessoas',
@@ -34,6 +36,7 @@ export const GerenciaGeralPage: React.FC = () => {
 
       const totalVeiculos: ChartData = {
         labels: ['Carros', 'Motos'],
+        title: 'Total de Veículos',
         datasets: [
           {
             label: 'Total de Veículos',
@@ -46,6 +49,7 @@ export const GerenciaGeralPage: React.FC = () => {
 
       const totalMovimentacao: ChartData = {
         labels: ['Entradas', 'Saídas'],
+        title: 'Total de Movimentação do Dia',
         datasets: [
           {
             label: 'Total de Movimentação do Dia',
@@ -58,6 +62,7 @@ export const GerenciaGeralPage: React.FC = () => {
 
       const totalAcessoPessoas: ChartData = {
         labels: ['Com Acesso', 'Sem Acesso'],
+        title: 'Total de Pessoas com Acesso',
         datasets: [
           {
             label: 'Total de Pessoas com Acesso',
@@ -100,11 +105,11 @@ export const GerenciaGeralPage: React.FC = () => {
   return (
     <Container>
       <h1>Gerência Geral</h1>
-
+    
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         {chartData.map((_, index) => (
           <div key={index} style={{ width: '45%' }}>
-            
+            <h5>{_.title}</h5>
             <canvas ref={(el) => (chartContainerRefs.current[index] = el)} />
           </div>
         ))}
