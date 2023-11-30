@@ -15,6 +15,8 @@ import { UnitTablePage } from "../pages/unitTables";
 import { VehiclePage } from "../pages/vehicles";
 import { BadgePage } from "../pages/badges";
 import { GerenciaGeralPage } from "../pages/management";
+import { RegisterVehicles } from "../pages/vehicles/register";
+import { RegisterUser } from "../pages/registeredStaff/registerUser";
 
 import { Dashboard } from "../layout";
 
@@ -139,5 +141,23 @@ export const router = createBrowserRouter([
             </Dashboard>
         }/>
     },
+    {
+        path: "/Cadastrar-Veiculo",
+        element:
+        <PrivateRoute element={
+            <Dashboard>
+                <RegisterVehicles/>
+            </Dashboard>
+        }/>
+    },
+    {
+        path:"/Cadastrar-Usuario",
+        element:
+        <PrivateRoute element={
+            <Dashboard>
+                <RegisterUser/>
+            </Dashboard>
+        }/>
+    }
 
 ])

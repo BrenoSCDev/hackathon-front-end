@@ -4,6 +4,7 @@ import { FaEdit, FaTrash, FaUserPlus } from 'react-icons/fa';
 import { AiOutlineSearch } from 'react-icons/ai'
 import { Pagination } from '../../components/pagination';
 import { Loader } from '../../components/loader';
+import { useNavigate } from 'react-router-dom';
 
 const usersData = [
     {
@@ -169,6 +170,7 @@ export function RegisteredUsers() {
     }, 2000) 
    })
  
+  const navigate = useNavigate()
   return (
 <Container>
   <h1>Usuários Cadastrados</h1>
@@ -232,7 +234,7 @@ export function RegisteredUsers() {
     Pesquisar
   </button>
 
-  <button className='btn btn-primary m-2 mb-3' onClick={aplicarFiltros}>
+  <button className='btn btn-primary m-2 mb-3' onClick={() => navigate('/Cadastrar-Usuario')}>
     <FaUserPlus size={17}/>
      Criar novo usuário
   </button>

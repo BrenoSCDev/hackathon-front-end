@@ -16,7 +16,8 @@ export const AuthProvider: React.FC<IParent> = ({children}) => {
         if(userData && tokenData) {
             setUser(JSON.parse(userData))
             setAuth(true)
-            server.defaults.headers['Authorization'] = `Bearer ${tokenData}`
+            server.defaults.headers['Authentication'] = `${tokenData}`
+            server.defaults.headers['access-level'] = 2
         }
     }
         verifyData()

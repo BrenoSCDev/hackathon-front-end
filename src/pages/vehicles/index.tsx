@@ -3,6 +3,7 @@ import { Container, Table, Form, Button, Row, Col } from 'react-bootstrap';
 import { Pagination } from '../../components/pagination';
 import { FaEdit, FaTrash, FaCarSide } from 'react-icons/fa';
 import { Loader } from '../../components/loader';
+import { useNavigate } from 'react-router-dom';
 
 const veiculosData = [
     {
@@ -246,6 +247,7 @@ export function VehiclePage() {
    })
  
 
+   const navigate = useNavigate()
   return (
     <Container>
       <h1>Veículos Cadastrados</h1>
@@ -319,7 +321,7 @@ export function VehiclePage() {
             <Button variant="primary" onClick={aplicarFiltros} className='mb-3 mt-3'>
               Aplicar Filtros
             </Button>
-            <button className='btn btn-primary m-3' onClick={aplicarFiltros}>
+            <button className='btn btn-primary m-3' onClick={() => navigate('/Cadastrar-Veiculo')}>
             <FaCarSide size={17}/>
             Cadastrar Veículo
             </button>

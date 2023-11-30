@@ -6,8 +6,8 @@ import { UseAuth } from '../../hooks';
 import { Loader } from '../../components/loader';
 
 export const LoginUser = () => {
-  const [username, setUsername] = useState<string>('2244')
-  const [pwd, setPwd] = useState<string>('pamonha#22')
+  const [username, setUsername] = useState<string>('4444')
+  const [pwd, setPwd] = useState<string>('pamonha')
   const {signIn, error, loading, auth} = UseAuth()
 
   const navigate = useNavigate()
