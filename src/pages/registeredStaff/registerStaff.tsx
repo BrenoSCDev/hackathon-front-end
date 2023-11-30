@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const RegisterUser = () => {
+export const RegisterStaff = () => {
   return (
     <div className="container mt-5 mb-5">
-    <h1 className="mb-4">Registrar Usuário</h1>
+    <h1 className="mb-4">Registrar Efetivo</h1>
     <div className='col-md-12 row'>
     <form className='row g-3 col-md-12'>
         <div className="col-md-6">
@@ -11,7 +11,19 @@ export const RegisterUser = () => {
             Nome completo
           </label>
           <input
-            placeholder='Digite o nome completo do usuário'
+            placeholder='Digite o Nome Completo do Usuário'
+            type="text"
+            className="form-control"
+            // value={surname}
+            // onChange={(e: ChangeEvent<HTMLInputElement>) => setSurname(e.target.value)
+          />
+        </div>
+        <div className="col-md-6">
+          <label htmlFor="descricao" className="form-label">
+           Nome de Guerra
+          </label>
+          <input
+            placeholder='Digite o Nome de Guerra do Efetivo'
             type="text"
             className="form-control"
             // value={surname}
@@ -19,19 +31,8 @@ export const RegisterUser = () => {
           />
         </div>
         <div className="col-md-3">
-          <label htmlFor="descricao" className="form-label">
-           Nível de acesso
-          </label>
-          <select className="form-select">
-            <option selected>Escolha o nível de acesso</option>
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-        </select>
-        </div>
-        <div className="col-md-3">
           <label htmlFor="endereco" className="form-label">
-            Módulos
+            Posto | Graduação
           </label>
           <select className="form-select">
             <option selected>Escolha o nível de acesso</option>

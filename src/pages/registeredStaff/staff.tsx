@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { Container, Table, Dropdown, ButtonGroup, FormControl } from 'react-bootstrap';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaUserPlus } from 'react-icons/fa';
 import { AiOutlineSearch } from 'react-icons/ai'
 import { Pagination } from '../../components/pagination';
 import { Loader } from '../../components/loader';
+import { useNavigate } from 'react-router-dom';
 
 const efetivosData = [
   {
@@ -178,6 +179,8 @@ export function RegisteredStaff() {
    }, 2000) 
   })
 
+  const navigate = useNavigate()
+
   return (
     <Container>
       <h1>Efetivos Cadastrados</h1>
@@ -240,6 +243,10 @@ export function RegisteredStaff() {
       <button onClick={aplicarFiltros} className='btn btn-primary m-2 mb-3'>
         <AiOutlineSearch size={20}/>
         Pesquisar
+      </button>
+      <button className='btn btn-primary m-2 mb-3' onClick={() => navigate('/Cadastrar-Efetivo')}>
+        <FaUserPlus size={17}/>
+        Criar novo Efetivo
       </button>
       <Table striped bordered hover>
         <thead>
