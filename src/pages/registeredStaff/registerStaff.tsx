@@ -34,18 +34,20 @@ export const RegisterStaff = () => {
           <label htmlFor="endereco" className="form-label">
             Posto | Graduação
           </label>
-          <select className="form-select">
-            <option selected>Escolha o nível de acesso</option>
-            <option value="Usuários">Usuários</option>
-            <option value="Efetivos">Efetivos</option>
-            <option value="Visitantes">Visitantes</option>
-            <option value="Postos de Servico">Postos de Serviço</option>
-            <option value="Alertas">Alertas</option>
-            <option value="Unidades">Unidades</option>
-            <option value="Veiculos">Veículos</option>
-            <option value="Gerencia">Gerencia</option>
-            <option value="Crachas">Crachás</option>
-        </select>
+          <select className='form-control'>
+            <option value="Cadete">Cadete</option>
+            <option value="Aspirante">Aspirante</option>
+            <option value="Segundo-Tenente">Segundo-Tenente</option>
+            <option value="Primeiro-Tenente">Primeiro-Tenente</option>
+            <option value="Capitão">Capitão</option>
+            <option value="Major">Major</option>
+            <option value="Tenente-Coronel">Tenente-Coronel</option>
+            <option value="Coronel">Coronel</option>
+            <option value="General de Brigada">General de Brigada</option>
+            <option value="General de Divisão">General de Divisão</option>
+            <option value="General de Exército">General de Exército</option>
+            </select>
+
         </div>
         <div className="col-md-3">
           <label htmlFor="endereco" className="form-label">

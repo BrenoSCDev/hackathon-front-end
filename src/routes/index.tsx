@@ -18,6 +18,7 @@ import { GerenciaGeralPage } from "../pages/management";
 import { RegisterVehicles } from "../pages/vehicles/register";
 import { RegisterUser } from "../pages/registeredStaff/registerUser";
 import { RegisterPost } from "../pages/serviceStations/register";
+import { RegisterStaff } from "../pages/registeredStaff/registerStaff";
 
 import { Dashboard } from "../layout";
 
@@ -166,6 +167,15 @@ export const router = createBrowserRouter([
         <PrivateRoute element={
             <Dashboard>
                 <RegisterPost/>
+            </Dashboard>
+        }/>
+    },
+    {
+        path: "/Cadastrar-Efetivo",
+        element:
+        <PrivateRoute element={
+            <Dashboard>
+                <RegisterStaff/>
             </Dashboard>
         }/>
     }
