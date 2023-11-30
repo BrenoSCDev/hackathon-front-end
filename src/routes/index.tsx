@@ -17,6 +17,7 @@ import { BadgePage } from "../pages/badges";
 import { GerenciaGeralPage } from "../pages/management";
 import { RegisterVehicles } from "../pages/vehicles/register";
 import { RegisterUser } from "../pages/registeredStaff/registerUser";
+import { RegisterPost } from "../pages/serviceStations/register";
 
 import { Dashboard } from "../layout";
 
@@ -156,6 +157,15 @@ export const router = createBrowserRouter([
         <PrivateRoute element={
             <Dashboard>
                 <RegisterUser/>
+            </Dashboard>
+        }/>
+    },
+    {
+        path: "/Cadastrar-Posto",
+        element:
+        <PrivateRoute element={
+            <Dashboard>
+                <RegisterPost/>
             </Dashboard>
         }/>
     }

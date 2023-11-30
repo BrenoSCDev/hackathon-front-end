@@ -4,6 +4,7 @@ import { FaEdit, FaTrash, FaUserPlus,FaWarehouse} from 'react-icons/fa';
 import { AiOutlineSearch } from 'react-icons/ai'
 import { Pagination } from '../../components/pagination';
 import { Loader } from '../../components/loader';
+import { useNavigate } from 'react-router-dom';
 
 const postosData = [
     {
@@ -148,10 +149,12 @@ export function ServiceStations() {
     }, 2000) 
    })
  
+   const navigate = useNavigate()
+
   return (
 <Container>
   <h1>Postos de Serviço</h1>
-
+  
   {
     loading ? 
     <div style={{display: 'flex', justifyContent: 'center', height: '50vh'}}>
@@ -212,7 +215,7 @@ export function ServiceStations() {
     Pesquisar
   </button>
 
-  <button className='btn btn-primary m-2 mb-3' onClick={aplicarFiltros}>
+  <button className='btn btn-primary m-2 mb-3' onClick={() => navigate('/Cadastrar-Posto')}>
     <FaWarehouse size={17}/>
      Cadastrar novo Posto
   </button>
